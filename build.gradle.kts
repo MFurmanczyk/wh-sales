@@ -1,7 +1,7 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
-    kotlin("jvm") version "1.9.23"
+    kotlin("jvm") version "2.0.0"
     id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
@@ -12,12 +12,17 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    compileOnly("org.apache.spark:spark-sql_2.13:3.3.1") // Apache Spark 3.3.1 for Scala 2.13
-    implementation("org.jetbrains.kotlinx.spark:kotlin-spark-api_3.3.1_2.13:1.2.3") // Spark Kotlin API 1.2.3 for Apache Spark 3.3.1 (and Scala 2.13)
-    implementation("com.fasterxml.jackson.core:jackson-core:2.14.2") // Required for proper work by other dependencies
+kotlin {
+    jvmToolchain(11)
+}
 
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
+dependencies {
+    implementation ("org.jetbrains.kotlinx.spark:kotlin-spark-api_3.3.2_2.13:1.2.4")
+    compileOnly ("org.apache.spark:spark-sql_2.13:3.3.2")
+
+    implementation("com.fasterxml.jackson.core:jackson-core:2.14.2")
+
+    implementation("com.mysql:mysql-connector-j:9.0.0") // MySQL Connector dependency
 }
 
 configurations.all {
@@ -25,29 +30,9 @@ configurations.all {
 }
 
 tasks{
-    test {
-        useJUnitPlatform()
-    }
 
-    register<ShadowJar>("buildExtraction") {
-        group = "build spark"
-        version = "1.0"
-        archiveBaseName.set("extracts-mysql")
-        mergeServiceFiles()
-        exclude("META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA")
-        manifest {
-            attributes(
-                "Main-Class" to ""
-            )
-        }
-        from(sourceSets.main.get().output) {
-            include("**/Sandbox1*.class")
-        }
-        configurations = listOf(project.configurations.runtimeClasspath.get())
+    shadowJar {
         isZip64 = true
+        archiveBaseName.set("wh-sales")
     }
-}
-
-kotlin {
-    jvmToolchain(17)
 }
