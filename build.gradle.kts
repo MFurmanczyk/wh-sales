@@ -1,7 +1,7 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
-    kotlin("jvm") version "1.9.23"
+    kotlin("jvm") version "2.0.0"
     id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
@@ -13,9 +13,11 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.apache.spark:spark-sql_2.13:3.3.1") // Apache Spark 3.3.1 for Scala 2.13
-    implementation("org.jetbrains.kotlinx.spark:kotlin-spark-api_3.3.1_2.13:1.2.3") // Spark Kotlin API 1.2.3 for Apache Spark 3.3.1 (and Scala 2.13)
-    implementation("com.fasterxml.jackson.core:jackson-core:2.14.2") // Required for proper work by other dependencies
+    compileOnly("org.apache.spark:spark-sql_2.13:3.5.1") // Apache Spark 3.3.1 for Scala 2.13
+    implementation("org.jetbrains.kotlinx.spark:kotlin-spark-api_3.3.1_2.13:1.2.4") // Spark Kotlin API 1.2.4 for Apache Spark 3.3.1 (and Scala 2.13)
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.0.0")
+
+    implementation("com.mysql:mysql-connector-j:9.0.0") // MySQL Connector dependency
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
 }
@@ -29,19 +31,20 @@ tasks{
         useJUnitPlatform()
     }
 
-    register<ShadowJar>("buildExtraction") {
+    register<ShadowJar>("buildExtractionCustomer") {
         group = "build spark"
         version = "1.0"
-        archiveBaseName.set("extracts-mysql")
+        archiveBaseName.set("extracts-mysql-customer")
         mergeServiceFiles()
         exclude("META-INF/*.SF", "META-INF/*.DSA", "META-INF/*.RSA")
         manifest {
             attributes(
-                "Main-Class" to ""
+                "Main-Class" to "io.github.mfurmanczyk.jobs.CustomerExtractionKt"
             )
         }
         from(sourceSets.main.get().output) {
-            include("**/Sandbox1*.class")
+            include("**/CustomerExtractionKt.class")
+            include("**/Customer*.class")
         }
         configurations = listOf(project.configurations.runtimeClasspath.get())
         isZip64 = true
