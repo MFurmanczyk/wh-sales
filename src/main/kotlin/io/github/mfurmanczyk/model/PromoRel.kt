@@ -4,19 +4,20 @@ import org.apache.spark.sql.types.DataTypes
 import org.apache.spark.sql.types.Metadata
 import org.apache.spark.sql.types.StructField
 import org.apache.spark.sql.types.StructType
+import java.math.BigDecimal
 
 data class PromoRel(
     val promo_id: Int,
     val product_id: Int? = null,
     val category_id: Int? = null,
-    val rate_discount: Float
+    val rate_discount: BigDecimal
 ) {
     companion object {
         val SCHEMA = StructType(arrayOf(
             StructField("promo_id", DataTypes.IntegerType, false, Metadata.empty()),
             StructField("product_id", DataTypes.IntegerType, true, Metadata.empty()),
             StructField("category_id", DataTypes.IntegerType, true, Metadata.empty()),
-            StructField("rate_discount", DataTypes.FloatType, false, Metadata.empty()),
+            StructField("rate_discount", DataTypes.DoubleType, false, Metadata.empty()),
         ))
     }
 }
