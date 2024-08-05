@@ -13,7 +13,7 @@ fun main() = withSpark(
 
     Scripts.startScript(spark)
 
-    val orderDs = spark.read().parquet("data/intermediate/ext_t_order.parquet").to<Order>().cache()
+    val orderDs = spark.read().parquet("data/intermediate/ext_t_order.parquet").to<Order>()
     val orderRelDs = spark.read().parquet("data/intermediate/ext_t_order_rel.parquet").to<OrderRel>()
     val promoDs = spark.read().parquet("data/intermediate/ext_t_promo.parquet").to<Promo>()
     val promoRelDs = spark.read().parquet("data/intermediate/ext_t_promo_rel.parquet").to<PromoRel>()
