@@ -1,6 +1,7 @@
 .gradle
 build/
 data/intermediate/
+data/target/
 scripts/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
