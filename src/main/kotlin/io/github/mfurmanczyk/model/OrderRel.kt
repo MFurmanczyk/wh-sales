@@ -8,7 +8,7 @@ import org.apache.spark.sql.types.StructType
 data class OrderRel(
     val order_id: Int,
     val product_id: Int,
-    val quantity_product: UInt
+    val quantity_product: Long
 ) {
     companion object {
         val SCHEMA = StructType(arrayOf(

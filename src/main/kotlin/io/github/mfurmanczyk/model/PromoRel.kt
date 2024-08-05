@@ -4,13 +4,12 @@ import org.apache.spark.sql.types.DataTypes
 import org.apache.spark.sql.types.Metadata
 import org.apache.spark.sql.types.StructField
 import org.apache.spark.sql.types.StructType
-import java.math.BigDecimal
 
 data class PromoRel(
     val promo_id: Int,
     val product_id: Int? = null,
     val category_id: Int? = null,
-    val rate_discount: BigDecimal
+    val rate_discount: Double
 ) {
     companion object {
         val SCHEMA = StructType(arrayOf(

@@ -9,7 +9,7 @@ data class Product(
     val id: Int,
     val category_id: Int? = null,
     val name: String,
-    val price: Float,
+    val price: Double,
     val desc_product: String? = null
 ) {
     companion object {
@@ -17,7 +17,7 @@ data class Product(
             StructField("id", DataTypes.IntegerType, false, Metadata.empty()),
             StructField("category_id", DataTypes.IntegerType, true, Metadata.empty()),
             StructField("name", DataTypes.StringType, false, Metadata.empty()),
-            StructField("price", DataTypes.FloatType, false, Metadata.empty()),
+            StructField("price", DataTypes.DoubleType, false, Metadata.empty()),
             StructField("desc_product", DataTypes.StringType, true, Metadata.empty()),
         ))
     }
