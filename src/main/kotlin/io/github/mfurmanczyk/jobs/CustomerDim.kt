@@ -13,7 +13,7 @@ fun main() = withSpark(
 
     val customerDs = spark.read().parquet("data/intermediate/ext_t_customer.parquet").to<Customer>()
 
-    val factDf = customerDs.select(
+    val dimDF = customerDs.select(
         "id",
         "name",
         "name_2",
@@ -25,5 +25,5 @@ fun main() = withSpark(
         "date_join"
     )
 
-    factDf.write().mode(SaveMode.Overwrite).parquet("data/target/t_customer_dim.parquet")
+    dimDF.write().mode(SaveMode.Overwrite).parquet("data/target/t_customer_dim.parquet")
 }
