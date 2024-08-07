@@ -1,4 +1,4 @@
-package io.github.mfurmanczyk.jobs
+package io.github.mfurmanczyk.jobs.extraction
 
 import io.github.mfurmanczyk.database.Database
 import io.github.mfurmanczyk.database.MySqlDatabase
@@ -10,7 +10,7 @@ import org.jetbrains.kotlinx.spark.api.withSpark
 import java.util.*
 
 fun main() = withSpark(
-    appName = "mysql_extraction_order_rel",
+    appName = "mysql_extraction_category",
     logLevel = SparkLogLevel.INFO
 ) {
 
@@ -27,9 +27,9 @@ fun main() = withSpark(
         password = dbConfig.password
     )
 
-    val orderRelDf = database.readTable("t_order_rel", Properties())
+    val categoryDf = database.readTable("t_category", Properties())
 
-    orderRelDf.write().mode(SaveMode.Overwrite).parquet("data/intermediate/ext_t_order_rel.parquet")
+    categoryDf.write().mode(SaveMode.Overwrite).parquet("data/intermediate/ext_t_category.parquet")
 
     Scripts.endScript(spark)
 }

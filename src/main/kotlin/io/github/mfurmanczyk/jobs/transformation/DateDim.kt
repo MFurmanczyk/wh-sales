@@ -1,4 +1,4 @@
-package io.github.mfurmanczyk.jobs
+package io.github.mfurmanczyk.jobs.transformation
 
 import io.github.mfurmanczyk.model.Customer
 import io.github.mfurmanczyk.model.Order

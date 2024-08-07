@@ -1,4 +1,4 @@
-package io.github.mfurmanczyk.jobs
+package io.github.mfurmanczyk.jobs.extraction
 
 import io.github.mfurmanczyk.database.Database
 import io.github.mfurmanczyk.database.MySqlDatabase
@@ -10,9 +10,9 @@ import org.jetbrains.kotlinx.spark.api.withSpark
 import java.util.*
 
 fun main() = withSpark(
-    appName = "mysql_extraction_order",
+    appName = "mysql_extraction_customer",
     logLevel = SparkLogLevel.INFO
-) {
+){
 
     Scripts.startScript(spark)
 
@@ -27,9 +27,10 @@ fun main() = withSpark(
         password = dbConfig.password
     )
 
-    val orderDf = database.readTable("t_order", Properties())
+    val customerDf = database.readTable("t_customer", Properties())
 
-    orderDf.write().mode(SaveMode.Overwrite).parquet("data/intermediate/ext_t_order.parquet")
+    customerDf.write().mode(SaveMode.Overwrite).parquet("data/intermediate/ext_t_customer.parquet")
 
     Scripts.endScript(spark)
+
 }
