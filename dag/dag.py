@@ -4,8 +4,8 @@ from datetime import timedelta, datetime
 from airflow import DAG
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 
-application_path = "/Users/maciejfurmanczyk/Documents/spark/wh-sales/build/libs/wh-sales-1.0-all.jar"
-properties_file_path = "/Users/maciejfurmanczyk/Documents/spark/wh-sales/src/main/resources/sales.properties"
+application_path = "path_to_the_jar"
+properties_file_path = "path_to_the_property_files"
 
 default_args = {
     'owner': 'airflow',

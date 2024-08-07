@@ -79,10 +79,10 @@ fun main() = withSpark(
         )
         .select(
             orderAndProductDf("id").alias("sale_id"),
-            col("sale_value"),
             orderAndProductDf("customer_id"),
             orderAndProductDf("product_id"),
             promoJoinedDf("promo_id"),
+            col("sale_value"),
             orderAndProductDf("date_order").alias("sale_date"),
             orderAndProductDf("status_order").alias("order_status_id"),
             orderAndProductDf("status_payment").alias("payment_status_id"),
