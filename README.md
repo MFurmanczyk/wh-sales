@@ -5,12 +5,12 @@ This project implements an ETL (Extract, Transform, Load) process to migrate and
 ## Features
 
 - **ETL Processing**:
-    - **T_CATEGORY**: Processes product categories.
-    - **T_CUSTOMER**: Processes customer data and their addresses.
-    - **T_ORDER**: Processes information about orders.
-    - **T_ORDER_REL**: Processes information about products in orders.
-    - **T_PRODUCT**: Processes product information.
-    - **T_PROMO and T_PROMO_REL**: Processes information about promotions and the products affected by them.
+    - **T_CATEGORY**: product categories.
+    - **T_CUSTOMER**: customer data and their addresses.
+    - **T_ORDER**: information about orders.
+    - **T_ORDER_REL**: information about products in orders.
+    - **T_PRODUCT**: Prosses product information.
+    - **T_PROMO and T_PROMO_REL**: information about promotions and the products affected by them.
 
 - **Data Transformation**:
     - Transforms data from OLTP format to a star schema suitable for analytical queries.
