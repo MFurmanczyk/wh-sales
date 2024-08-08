@@ -4,7 +4,7 @@ This project implements an ETL (Extract, Transform, Load) process to migrate and
 
 ## Features
 
-- **ETL Processing**:
+- **ETL Processing of MySQL tables**:
     - **T_CATEGORY**: product categories.
     - **T_CUSTOMER**: customer data and their addresses.
     - **T_ORDER**: information about orders.
