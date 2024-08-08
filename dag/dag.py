@@ -168,11 +168,16 @@ sales_fact_transformation = SparkSubmitOperator(
     dag=sales_dag
 )
 
-customer_extraction >> [address_dim_transformation, customer_dim_transformation, date_dim_transformation, sales_fact_transformation]
-order_extraction >> [date_dim_transformation, order_status_transformation, payment_status_transformation, sales_fact_transformation]
+(customer_extraction >>
+ [address_dim_transformation, customer_dim_transformation, date_dim_transformation, sales_fact_transformation])
+(order_extraction >>
+ [date_dim_transformation, order_status_transformation, payment_status_transformation, sales_fact_transformation])
 order_rel_extraction >> sales_fact_transformation
-promo_extraction >> [date_dim_transformation, promo_dim_transformation, sales_fact_transformation]
-promo_rel_extraction >> [promo_dim_transformation, sales_fact_transformation]
-product_extraction >> [product_dim_transformation, sales_fact_transformation]
+(promo_extraction >>
+ [date_dim_transformation, promo_dim_transformation, sales_fact_transformation])
+(promo_rel_extraction >>
+ [promo_dim_transformation, sales_fact_transformation])
+(product_extraction >>
+ [product_dim_transformation, sales_fact_transformation])
 category_extraction >> product_dim_transformation
 address_dim_transformation >> sales_fact_transformation
